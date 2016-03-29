@@ -1,0 +1,200 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[11pt,paper=a4,oneside,ngerman,english,parskip=half]{scrartcl}
+
+% !TeX spellcheck = en_GB
+
+%\KOMAoptions{BCOR=6mm,DIV=12}
+\KOMAoptions{DIV=12}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{luainputenc}
+% % %\setcounter{secnumdepth}{3}
+% % %\setcounter{tocdepth}{3}
+\usepackage{babel}
+\usepackage[autostyle,english=british]{csquotes} % Anführungsstriche mit \enquote
+
+\usepackage[style=phys,biblabel=brackets,backend=biber]{biblatex}
+\addbibresource{C:/Users/gerald/Documents/library.bib}
+
+% % % Tabellen, Listen, etc. % % %
+% % %\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}		% customizable list environments
+\setlist{noitemsep}
+% % %\usepackage{float}
+\usepackage{colortbl}
+% Farben für die Tabelle
+\definecolor{darkgrey}{rgb}{0.7,0.7,0.7}
+\definecolor{lightgrey}{rgb}{0.85,0.85,0.85}
+
+% % % % % % % Grafikpaket
+\usepackage{graphicx, import}
+%\usepackage[miktex]{gnuplottex}
+%\usepackage{gnuplot-lua-tikz}
+%\usepackage{tikz}
+%\usetikzlibrary{babel,arrows.meta,intersections}
+%\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=colon]{caption}
+%\usepackage[margin=20pt,font=small,labelfont=bf,labelsep=colon]{subcaption}
+\usepackage{subfig}
+
+% % % Mathematikpakete
+\usepackage{multirow}
+%\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{esint} % für verschiedenste Integralzeichen
+% \int \limts_{}^{} für über, unter dem Zeichen
+\usepackage{xfrac} % für sfrac
+
+\usepackage{makeidx}
+\makeindex
+
+\DeclareMathOperator{\sinc}{sinc}
+%\usepackage{trsym} %für \TransformHoriz
+
+% % % Physikalische Einheiten etc.
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}} % Dezimalzahlen in \num mit ,
+
+
+\usepackage{microtype}
+
+\usepackage[unicode=true,
+	bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+	breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+	{hyperref}
+% % %\hypersetup{pdftitle={Akusto-optischer Effekt: Die Beugungsstärke in Abhängigkeit der Wellenfrontverkrümmung des Laserlichts},
+% % % pdfauthor={Gerald Rapior},
+% % % pdfkeywords={Akusto-optischer Effekt; Wellenfrontverkrümmung; Beugungsstärke}}
+
+% % %\makeatletter
+
+
+%\usepackage[OT2, OT1]{fontenc} % für russisch
+%
+%\newcommand\cyr{%
+%\renewcommand\rmdefault{wncyr}%
+%\renewcommand\sfdefault{wncyss}%
+%\renewcommand\encodingdefault{OT2}%
+%\normalfont
+%\selectfont}
+%\DeclareTextFontCommand{\textcyr}{\cyr}
+
+
+\KOMAoption{captions}{topbeside,tableheading,nooneline}
+\addtokomafont{captionlabel}{\bfseries}
+
+\addto\captionsngerman{%
+    \renewcommand{\figurename}{Abb.}%
+    \renewcommand{\tablename}{Tab.}%
+}
+
+% % %\renewcommand*{\figureformat}{\figurename\,\thefigure}
+% % %\renewcommand*{\tableformat}{\tablename\,\thetable}
+% % %\renewcommand*{\captionformat}{.\ }
+% % %\setcapindent{0pt}
+
+\addto\captionsngerman{\renewcommand{\indexname}{Namen- und Sachverzeichnis}}
+%\addto\captionsngerman{\renewcommand{\bibname}{Ergänzende und weiterführende Literatur}} % lässt sich nur in bibLatex umdefinieren
+
+
+\usepackage{calc}
+\renewcommand{\labelenumi}{\textbf{\arabic{chapter}.\theenumi.}}
+\renewcommand{\labelenumii}{\textbf{\theenumii)}}
+\setlist[enumerate,1]{align=left, leftmargin=0pt,labelwidth=*}
+\setlist[enumerate,2]{align=left, leftmargin=0pt,labelwidth=*}
+
+
+% Keine "Schusterjungen"
+\clubpenalty = 10000
+% Keine "Hurenkinder"
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+
+
+\title{Volume of a simplex}
+\author{Gerald Rapior}
+\date{29.03.2016}
+%\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Definition of the problem}
+\label{sec:DefProblem}
+
+It should be shown that the volume of a simplex tends to 0 if the dimension of simplex grows.
+
+Say $n$ is the dimension and $v$ the volume of a simplex than
+\begin{equation}
+\lim_{n\rightarrow\infty} v(n) = 0.
+\end{equation}
+
+In geometry, a simplex (plural: simplexes or simplices) is a generalization of the notion of a triangle or tetrahedron to arbitrary dimensions (see \href{https://en.wikipedia.org/wiki/Simplex}{Simplex in Wikipedia}).
+For simplicity a canonical basis of unit vectors $\vec{e_i}$ is used. The simplex is determined by the set of points:
+\begin{equation}
+C = \left\{ c_1 \vec{e_1} + \cdots + c_n \vec{e_n}\,|\,c_i\geq 0, 0 \leq i \leq n, \sum_{i=1}^{n} c_i = 1 \right\}.
+\end{equation}
+The borders of such a simplex are the unit vectors and straight lines between the end points of the unit vectors respectively.
+
+
+\section{Determination of volume}
+
+$n = 1$:
+Bild Linie
+
+The length (volume in one dimension) is determined by:
+\begin{equation}
+v(1) = \int\limits_{0}^{a}\text{d}x =\biggl[x\biggl]_{0}^{a} = a.
+\end{equation}
+Later the $a$ can be substitute by 1.
+
+$n = 2$:
+Bild Dreieck
+
+The surface of the shaded triangle is determined by:
+\begin{equation*}
+v(2) = \int\limits_{0}^{a} \int\limits_{0}^{y} \text{d}x\,\text{d}y  = \int\limits_{0}^{a} y \,\text{d}y = \left[\frac{1}{2}y^2\right]_{0}^{a} = \frac{a^2}{2}.
+\end{equation*}
+
+$n = 3$:
+Bild Wuerfel
+
+The volume of the shaded area is determined by:
+
+\begin{equation*}
+v(3) = \int\limits_{0}^{a} \int\limits_{0}^{z} \int\limits_{0}^{y}\text{d}x\,\text{d}y\,\text{d}z  = \int\limits_{0}^{a} \int\limits_{0}^{z} y \,\text{d}y\,\text{d}z = \int\limits_{0}^{a} \frac{z^2}{2} \,\text{d}z =\left[\frac{1}{2\cdot 3}z^3\right]_{0}^{a} = \frac{a^3}{6}.
+\end{equation*}
+
+It seems that the volume $v(n)$ of dimension n for $a = 1$ is:
+\begin{equation}
+v(n) = \frac{1}{n!}.
+\end{equation}
+
+
+\section{Proof of the volume}
+The proof is made by induction.
+$v(n) = \sfrac{1}{n!}$ for $n = 1$ is shown above. Say the equation is valid for $n$. Next it has to be shown that the equation is valid for $n+1$. 
+
+
+
+
+
+
+
+%\begin{figure}
+%\centering
+%\input{./pics/Erg-Feld-b20v0_8t0_04.tex}
+%\caption{Feldverteilung bei $b=\num{20}$ und $v=\num{0.8}$}
+%\label{fig.Erg-Feld-b20v0_8t0_04}
+%\end{figure}
+
+
+
+
+
+\printbibliography[title=Weiterführende Literatur]
+\end{document}
