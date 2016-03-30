@@ -43,6 +43,7 @@
 %\usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{esint} % für verschiedenste Integralzeichen
 % \int \limts_{}^{} für über, unter dem Zeichen
 \usepackage{xfrac} % für sfrac
@@ -65,7 +66,7 @@
 	breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
 	{hyperref}
 % % %\hypersetup{pdftitle={Akusto-optischer Effekt: Die Beugungsstärke in Abhängigkeit der Wellenfrontverkrümmung des Laserlichts},
-% % % pdfauthor={Gerald Rapior},
+% % %pdfauthor={Gerald Rapior},
 % % % pdfkeywords={Akusto-optischer Effekt; Wellenfrontverkrümmung; Beugungsstärke}}
 
 % % %\makeatletter
@@ -128,57 +129,91 @@
 
 It should be shown that the volume of a simplex tends to 0 if the dimension of simplex grows.
 
-Say $n$ is the dimension and $v$ the volume of a simplex than
+Say $v_n(a)$ is the volume of a simplex where $n$ is the dimension. For convenience the volume will be determined for an arbitrary length $a$ and later $a = 1$ will be set. Than
 \begin{equation}
-\lim_{n\rightarrow\infty} v(n) = 0.
+\lim\limits_{n\rightarrow\infty} v(a = 1) = 0.
 \end{equation}
 
 In geometry, a simplex (plural: simplexes or simplices) is a generalization of the notion of a triangle or tetrahedron to arbitrary dimensions (see \href{https://en.wikipedia.org/wiki/Simplex}{Simplex in Wikipedia}).
-For simplicity a canonical basis of unit vectors $\vec{e_i}$ is used. The simplex is determined by the set of points:
+For simplicity a canonical basis of unit vectors $\vec{e_i}$ is used. The simplex is determined by a set of points:
 \begin{equation}
-C = \left\{ c_1 \vec{e_1} + \cdots + c_n \vec{e_n}\,|\,c_i\geq 0, 0 \leq i \leq n, \sum_{i=1}^{n} c_i = 1 \right\}.
+C = \left\{ c_1 \vec{e_1} + \cdots + c_n \vec{e_n}\,| \,\forall i,\,c_i\geq 0,\, \sum_{i=1}^{n} c_i = 1 \right\}.
 \end{equation}
-The borders of such a simplex are the unit vectors and straight lines between the end points of the unit vectors respectively.
+Borders of such a simplex are the unit vectors and straight lines between end points of the unit vectors respectively.
 
 
 \section{Determination of volume}
+\label{sec:Volume}
 
-$n = 1$:
-Bild Linie
+\begin{itemize}
+\item $n = 1$:
+\begin{figure}
+\centering
+\import{./pics/}{1-dim.pdf_tex}
+\caption{Volume of a 1-D simplex}
+\label{fig.1-dim}
+\end{figure}
 
-The length (volume in one dimension) is determined by:
+In figure \ref{fig.1-dim} is shown a 1-dimensional simplex (a straight line). The length (volume in one dimension) is determined by:
 \begin{equation}
-v(1) = \int\limits_{0}^{a}\text{d}x =\biggl[x\biggl]_{0}^{a} = a.
+v_1(a) = \int\limits_{0}^{a}\text{d}x =\biggl[x\biggl]_{0}^{a} = a.
+\label{eq:1-dim-vol}
 \end{equation}
-Later the $a$ can be substitute by 1.
+Later the $a$ can be substituted by 1.
 
-$n = 2$:
-Bild Dreieck
+\item $n = 2$:
+\begin{figure}
+\centering
+\import{./pics/}{2-dim.pdf_tex}
+\caption{Volume of a 2-D simplex}
+\label{fig.2-dim}
+\end{figure}
 
-The surface of the shaded triangle is determined by:
-\begin{equation*}
-v(2) = \int\limits_{0}^{a} \int\limits_{0}^{y} \text{d}x\,\text{d}y  = \int\limits_{0}^{a} y \,\text{d}y = \left[\frac{1}{2}y^2\right]_{0}^{a} = \frac{a^2}{2}.
-\end{equation*}
-
-$n = 3$:
-Bild Wuerfel
-
-The volume of the shaded area is determined by:
-
-\begin{equation*}
-v(3) = \int\limits_{0}^{a} \int\limits_{0}^{z} \int\limits_{0}^{y}\text{d}x\,\text{d}y\,\text{d}z  = \int\limits_{0}^{a} \int\limits_{0}^{z} y \,\text{d}y\,\text{d}z = \int\limits_{0}^{a} \frac{z^2}{2} \,\text{d}z =\left[\frac{1}{2\cdot 3}z^3\right]_{0}^{a} = \frac{a^3}{6}.
-\end{equation*}
-
-It seems that the volume $v(n)$ of dimension n for $a = 1$ is:
+In figure \ref{fig.2-dim} is shown a 2-dimensional simplex (a triangle). The surface of the shaded triangle is determined by:
 \begin{equation}
-v(n) = \frac{1}{n!}.
+v_2(a) = \int\limits_{0}^{a} \int\limits_{0}^{y} \text{d}x\,\text{d}y  = \int\limits_{0}^{a} y \,\text{d}y = \left[\frac{1}{2}\,y^2\right]_{0}^{a} = \frac{a^2}{2}.
+\end{equation}
+
+\item $n = 3$:
+\begin{figure}
+\centering
+\import{./pics/}{3-dim.pdf_tex}
+\caption{Volume of a 3-D simplex}
+\label{fig.3-dim}
+\end{figure}
+
+The volume of the shaded area (see fig.\,\ref{fig.3-dim}) is determined by \footnote{The dashed triangle in fig.\,\ref{fig.3-dim} is an arbitrary similar triangle of the \enquote{base}. The size is direct related to the position $z$. At least all these triangles are \enquote{added together}. This shows clear the recursive way to construct volumes of higher dimensions.}:
+
+\begin{equation}
+v_3(a) = \int\limits_{0}^{a} \int\limits_{0}^{z} \int\limits_{0}^{y}\text{d}x\,\text{d}y\,\text{d}z  = \int\limits_{0}^{a} \int\limits_{0}^{z} y \,\text{d}y\,\text{d}z = \int\limits_{0}^{a} \frac{z^2}{2} \,\text{d}z =\left[\frac{1}{2\cdot 3}\,z^3\right]_{0}^{a} = \frac{a^3}{6}.
+\end{equation}
+
+\end{itemize}
+
+It seems that the volume $v_n(a)$ of dimension $n$ for $a = 1$ is:
+\begin{equation}
+\label{eq:volume}
+v_n(1) = \frac{1}{n!}.
 \end{equation}
 
 
-\section{Proof of the volume}
-The proof is made by induction.
-$v(n) = \sfrac{1}{n!}$ for $n = 1$ is shown above. Say the equation is valid for $n$. Next it has to be shown that the equation is valid for $n+1$. 
+\section{Proof of (\ref{eq:volume})}
+The proof is made by means of induction.
+$v_n(a) = \sfrac{1}{n!}$ for $n = 1$ is shown above \eqref{eq:1-dim-vol}. Say the equation is valid for $n$. Next it has to be shown that the equation is valid for $n+1$.
+\begin{proof}
+\begin{align}
+v_{n+1}(a) &= \int\limits_{0}^{a} \underbrace{\int\limits_{0}^{x_{n+1}} \cdots \int\limits_{0}^{x_2} \text{d}x_1 \cdots \text{d}x_n}_{=\;v_n(x_{n+1})}  \,\text{d}x_{n+1} \\
+ &= \int\limits_{0}^{a} \frac{1}{n!} \, x_{n+1}^n \,\text{d}x_{n+1} \\
+ &= \left[\frac{1}{n!}\,\frac{1}{n+1}\,x_{n+1}^{n+1} \right]_0^{a} = \frac{a^{n+1}}{(n+1)!} \qedhere
+\end{align}
+\end{proof}
 
+In the formula above old $x$, $y$ and $z$ are replaced by $x_1$, $x_2$ and $x_3$. For $a = 1$ we get result for volume of a simplex.
+
+At least we know that
+\begin{equation}
+\lim\limits_{n\rightarrow \infty}v_n(1) = \lim\limits_{n\rightarrow \infty} \frac{1}{n!} = 0.
+\end{equation}
 
 
 
